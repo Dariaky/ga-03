@@ -11,8 +11,6 @@ on:
       my-result:  # return value of the function
         value: ${{ jobs.deploy.outputs.my-outcome }} # output value
         description: Some output
-        required: true
-        type: string
     #secrets:
       #some-secret:
         #required: false

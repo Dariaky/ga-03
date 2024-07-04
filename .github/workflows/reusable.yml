@@ -1,0 +1,22 @@
+name: Reusable Workflow # Can be considered as a function that is called by the main workflow
+on:
+  workflow_call:
+    inputs:
+      my-artifact-name: # function params, e.g. here - dist-files
+        description: Name of the artifact to download
+        required: true # should workflow fail if we are not getting this input
+        default: dist # if we won't receive an input value, we will use this default
+        type: string  # input type, number, string, boolean, etc.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.my-artifact-name }}   # function params, e.g. here - dist-files
+      - name: List files
+        run: ls
+      - name: Deploy
+        run: echo "Deploying something..."

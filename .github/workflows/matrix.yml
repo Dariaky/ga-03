@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:  # So with that this job will run 9 times (in parallel by default). 3 node versions * 3 OS
         my-node-version: [12, 14, 16]
-        my-os: [ubuntu-latest, windows-latest, macOS-latest]
+        my-os: [ubuntu-latest, windows-latest, macOS-latest] # some of them will fail, this is ok, this repo has some features that are not supported on some OS
         include:  # This single combination will be included
           - my-node-version: 18
             my-os: ubuntu-latest

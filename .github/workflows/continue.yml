@@ -1,4 +1,4 @@
-name: Website Deployment
+name: Continue Website Deployment
 on:
   push:
     branches:
@@ -16,7 +16,7 @@ jobs:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true' # cache-hit is an output of the actions/cache@v3. Boolean
+        if: steps.cache.outputs.cache-hit != 'true' # cache-hit is an output of the actions/cache@v3. Boolean.
         run: npm ci
       - name: Lint code
         run: npm run lint
@@ -36,7 +36,7 @@ jobs:
         run: npm ci
 
       - name: Test code
-        continue-on-error: true # often static boolean. Even if this step fails, the next step and jobs will continue
+        continue-on-error: true # often static boolean. Even if this step fails, the next step and jobs will continue. Overall workflow will succeed
         id: run-tests
         run: npm run test
 

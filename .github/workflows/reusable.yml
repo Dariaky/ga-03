@@ -31,4 +31,4 @@ jobs:
         run: echo "Deploying something..."
       - name: Set output
         id: set-result
-        run: echo "my-step-result=success" >> "$GITHUB_ENV"  # output value
+        run: echo "my-step-result='success'" >> "$GITHUB_ENV"  # output value

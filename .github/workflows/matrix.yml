@@ -8,9 +8,15 @@ jobs:
   build:
     continue-on-error: true
     strategy:
-        matrix:  # So with that this job will run 9 times (in parallel by default). 3 node versions * 3 OS
-            my-node-version: [12, 14, 16]
-            my-os: [ubuntu-latest, windows-latest, macOS-latest]
+      matrix:  # So with that this job will run 9 times (in parallel by default). 3 node versions * 3 OS
+        my-node-version: [12, 14, 16]
+        my-os: [ubuntu-latest, windows-latest, macOS-latest]
+        include:  # This single combination will be included
+          - my-node-version: 18
+            my-os: ubuntu-latest
+        exclude: # This combination will be excluded from the matrix
+          - my-node-version: 12
+            my-os: windows-latest
     runs-on: ${{ matrix.my-os }}
     steps:
       - name: Get code

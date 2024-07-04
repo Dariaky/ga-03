@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Output deploy result
-        run: echo "${{ needs.deploy.outputs.my-result }} # function return value
+        run: echo "${{ needs.deploy.outputs.my-result }}" # function return value
   report:
     needs: [lint, deploy] # first and last of the sequence (lint is parallel). Important for IF statement to work, otherwise report will run in parallel and won't do the trick
     if: failure()

@@ -38,7 +38,7 @@ jobs:
         id: run-tests
         run: npm run test
       - name: Upload test report
-        if: steps.run-tests.outcome == 'failure'  # This step will be run only if prev failed
+        if: steps.run-tests.outcome == 'failure'  # This step will be run only if prev failed. Overall workflow will fail
         uses: actions/upload-artifact@v3
         with:
           name: test-report

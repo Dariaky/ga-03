@@ -6,11 +6,12 @@ on:
 
 jobs:
   build:
+    continue-on-error: true
     strategy:
-        matrix:  # So with that this workflow will run 9 times. 3 node versions * 3 OS
+        matrix:  # So with that this job will run 9 times (in parallel by default). 3 node versions * 3 OS
             my-node-version: [12, 14, 16]
             my-os: [ubuntu-latest, windows-latest, macOS-latest]
-    runs-on: ${{ matrix.my-os }}}
+    runs-on: ${{ matrix.my-os }}
     steps:
       - name: Get code
         uses: actions/checkout@v3

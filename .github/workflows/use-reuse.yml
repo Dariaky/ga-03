@@ -66,12 +66,21 @@ jobs:
         with:
           name: dist-files
           path: dist
+
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml # Reusable workflow
     with:
       my-artifact-name: dist-files # function params, e.g. here - dist-files
+    #secrets:
+        #some-secret: ${{ secrets.SOME_SECRET }} # secret function params
 
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output deploy result
+        run: echo "${{ needs.deploy.outputs.my-result }} # function return value
   report:
     needs: [lint, deploy] # first and last of the sequence (lint is parallel). Important for IF statement to work, otherwise report will run in parallel and won't do the trick
     if: failure()

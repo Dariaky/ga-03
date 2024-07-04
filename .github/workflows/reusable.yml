@@ -7,9 +7,20 @@ on:
         required: true # should workflow fail if we are not getting this input
         default: dist # if we won't receive an input value, we will use this default
         type: string  # input type, number, string, boolean, etc.
+    outputs:
+      my-result:  # return value of the function
+        value: ${{ jobs.deploy.outputs.my-outcome }} # output value
+        description: Some output
+        required: true
+        type: string
+    #secrets:
+      #some-secret:
+        #required: false
 
 jobs:
   deploy:
+    outputs:
+      my-outcome: ${{ steps.set-result.outputs.my-step-result }} # output value
     runs-on: ubuntu-latest
     steps:
       - name: Get build artifacts
@@ -20,3 +31,6 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying something..."
+      - name: Set output
+        id: set-result
+        run: echo "::set-output name=my-step-result::success" # output value
